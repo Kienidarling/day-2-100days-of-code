@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MUSIC PLAYER APP</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/4133edc8cc.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="download.jpg">
+</head>
+<body>
+    <div class="container">
+        <div class="player">
+            <nav>
+                <div class="navbutton">
+                    <i class="fa-solid fa-angle-left"></i>
+                </div>
+                <div class="navbutton">
+                    <i class="fa-sharp fa-solid fa-bars"></i>
+                </div>
+            </nav>
+            <img src="non.png" class="songimg">
+            <h1>Non-Living Thing</h1><br>
+          <p> ( Sarkodie ft. Oxlade)</p>
+          <audio  id="music">
+            <source src="Sarkodie-feat-Oxlade-Non-Living-Thing-(TrendyBeatz.com).mp3" type="audio/mpeg">
+          </audio>
+          <input type="range" value="0" id="sequence">
+          <div class="conbutton">
+            <div>
+                <i class="fa-solid fa-backward"></i></div>
+              <div onclick="playPause()">  <i class="fa-solid fa-play" id="conId"></i></div>
+               <div> <i class="fa-solid fa-forward"></i></div>
+            </div>
+          </div>
+        </div>
+    </div>
+   <script>
+    let sequence = document.getElementById("sequence");
+    let music= document.getElementById("music");
+    let conId = document.getElementById("conId"); 
+    
+   music.onloadedmetadata = function() {
+    
+    sequence.max = music.duration;
+    sequence.value = music.currentTime;
+   }
+    function playPause(){
+        if(conId.classList.contains("fa-pause")){
+            music.pause();
+            conId.classList.remove("fa-pause");
+            conId.classList.add("fa-play");
+        }
+        else{
+            music.play();
+            conId.classList.add("fa-pause");
+            conId.classList.remove("fa-play");
+        }    
+    }
+
+if(music.play()){
+    setInterval(() => { sequence.value = music.currentTime;}, 
+    500);
+}
+
+ sequence.onchange = function(){
+        music.play();
+        music.currentTime = sequence.value;
+        conId.classList.add("fa-pause");
+        conId.classList.remove("fa-play");
+    }
+    
+    </script> 
+</body>
+</html>
